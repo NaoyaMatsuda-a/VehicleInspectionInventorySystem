@@ -51,3 +51,52 @@
 ---
 
 ## 🏗 Architecture
+
+---
+
+## 🗂 ER Diagram
+
+```mermaid
+erDiagram
+  CUSTOMER {
+    int id
+    string name
+    string phone
+    string address
+  }
+
+  VEHICLE {
+    int id
+    int customer_id
+    string model
+    string plate_number
+    date last_inspection_date
+  }
+
+  INSPECTION_RESERVATION {
+    int id
+    int vehicle_id
+    date date
+    string status
+    string mechanic_name
+  }
+
+  PART {
+    int id
+    string part_number
+    string part_name
+    int stock_quantity
+    int threshold
+  }
+
+  PART_USAGE {
+    int id
+    int reservation_id
+    int part_id
+    int used_quantity
+  }
+
+  CUSTOMER ||--o{ VEHICLE : owns
+  VEHICLE ||--o{ INSPECTION_RESERVATION : has
+  INSPECTION_RESERVATION ||--o{ PART_USAGE : uses
+  PART ||--o{ PART_USAGE : is_used
